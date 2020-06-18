@@ -1,0 +1,82 @@
+一：
+概述
+
+在Linux下安装一个应用程序时，
+一般先运行脚本configure，
+然后用make来编译源程序，
+再运行make install，
+最后运行make clean删除一些临时文件。
+相关点的详解
+
+使用GNU的AUTOCONF和AUTOMAKE的安装步骤即如上所示,AUTOMAKE和AUTOCONF是用来发布C程序的东西。
+./configure是用来检测你的安装平台的前置条件及做一些设置的。比如它会检测你是不是有CC或GCC，并不是需要CC或GCC，它是个shell脚本；
+make是用来编译的，它从Makefile中读取指令，然后编译；
+make install是用来安装的，它也从Makefile中读取指令，安装到指定的位置。
+安装步骤
+
+    下载源码
+
+    解压源码
+
+    tar -xf automake-1.14.tar
+
+    执行configure,可用 --prefix来指定安装位置，默认安装到/usr/local/bin下
+
+    ./configure --prefix=/home/xxx/root/
+
+configure是一个shell脚本,可以自动设定源程序以符合各种不同平台上Unix系统的特性，并且根据系统参数（注：可以通过 ./configure --help 查看参数信息）及环境产生合适的Makefile文件，让源程序可以很方便地在这些不同的平台上被编译连接。这样，运行configure脚本，就可产生出符合GNU规范的Makefile文件了
+
+    make
+    大多数的源代码包都经过这一步进行编译（当然有些perl或python编写的软件需要调用perl或python来进行编译）。
+
+    make install
+
+清除编译产生的中间文件的操作如下：
+make clean：清除编译产生的可执行文件及目标文件(object file，*.o)；
+make distclean：除了清除可执行文件和目标文件外，把configure所产生的Makefile也清除掉
+
+
+
+二：
+
+查询autoconf当前版本的命令
+
+[root@192 xxx]# rpm -qf /usr/bin/autoconf
+autoconf-2.59-12
+
+卸载当前autoconf 版本
+[root@192 xxx]# rpm -e --nodeps autoconf-2.59
+
+下载安装最新autoconf 2.69版本
+下载地址 http://ftp.gnu.org/gnu/autoconf/
+
+选择 autoconf-2.69.tar.gz 下载，或者其他你需要的版本。
+
+安装：
+
+[root@192 xxx]# tar -zxvf autoconf-2.69.tar.gz 
+[root@192 xxx]# cd autoconf-2.69
+[root@192 autoconf-2.69]# ./configure --prefix=/usr/
+[root@192 autoconf-2.69]# make
+[root@192 autoconf-2.69]# make install
+
+查看当前autoconf版本
+ /usr/bin/autoconf -V 或 rpm -qf /usr/bin/autoconf
+
+[root@192 autoconf-2.69]#  /usr/bin/autoconf -V
+autoconf (GNU Autoconf) 2.69
+Copyright (C) 2012 Free Software Foundation, Inc.
+License GPLv3+/Autoconf: GNU GPL version 3 or later
+<http://gnu.org/licenses/gpl.html>, <http://gnu.org/licenses/exceptions.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Written by David J. MacKenzie and Akim Demaille.
+[root@192 autoconf-2.69]#
+
+
+
+automake下载地址
+
+automake下载地址
+
+http://ftp.gnu.org/gnu/automake/
